@@ -3,7 +3,7 @@
 Node* last(List* list){
 
     Node * current_node = list -> head;
-    for(int increment = 0; current_node -> next != 0; increment++){
+    for(int increment = 0; current_node -> next != NULLPTR; increment++){
 
             current_node = current_node -> next;
 
@@ -42,6 +42,7 @@ char index(List* list, Node* new_node, int position){
         current_node = current_node -> next;
     
     }
+    new_node -> next = current_node -> next;
     current_node -> next = new_node;
     return 0;
 
@@ -50,7 +51,7 @@ char index(List* list, Node* new_node, int position){
 Node* deleteNode(List* list, Node* node_ptr){
 
     Node * current_node = list -> head;
-    for(int increment = 0; current_node -> next != 0; increment++){
+    for(int increment = 0; current_node -> next != NULLPTR; increment++){
         
         if(current_node -> next == node_ptr){
 
