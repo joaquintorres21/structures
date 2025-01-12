@@ -89,14 +89,14 @@ char index(List* list, Node* new_node, int position){
 
 //STACK FUNCTIONS
 
-STACK char stack(Stack * stack, Node * new_node){
+char stack(Stack * stack, Node * new_node){
 
     new_node -> next = stack->elements->head;
     stack->elements->head = new_node;
 
 }
 
-STACK Node* unstack(Stack* stack){
+Node* unstack(Stack* stack){
 
     Node* ptr_to_head = stack->elements->head;
     stack->elements->head = stack->elements->head->next;
