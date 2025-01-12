@@ -1,4 +1,43 @@
 #include "structures.h"
+#include <stdlib.h>
+
+Node* newNode(int node_value){
+
+    Node* created_node = (Node*) malloc(sizeof(Node));
+    created_node -> value = node_value;
+    created_node -> next = NULLPTR;
+    return created_node;
+
+}
+
+Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
+
+    Node * current_node = list -> head;
+    for(int increment = 0; current_node -> next != NULLPTR; increment++){
+        
+        if(current_node -> next == node_ptr){
+
+            current_node -> next = node_ptr -> next;
+
+        }
+        current_node = current_node -> next;
+
+    
+    }
+    if(free_trigger) {
+        free(node_ptr);
+        return NULLPTR;
+        //The node_ptr is now useless and may cause problems, so we just discard it.
+    }
+    return node_ptr;
+}
+
+List* clearList(List* reference){
+    
+    reference->head = NULLPTR;
+    return reference;
+
+}
 
 Node* last(List* list){
 
@@ -36,7 +75,7 @@ char index(List* list, Node* new_node, int position){
         if(!current_node -> next){
             
             current_node -> next = new_node;
-            return 0;
+            return SUCCESS;
 
         }
         current_node = current_node -> next;
@@ -44,22 +83,23 @@ char index(List* list, Node* new_node, int position){
     }
     new_node -> next = current_node -> next;
     current_node -> next = new_node;
-    return 0;
+    return SUCCESS;
 
 }
 
-Node* deleteNode(List* list, Node* node_ptr){
+//STACK FUNCTIONS
 
-    Node * current_node = list -> head;
-    for(int increment = 0; current_node -> next != NULLPTR; increment++){
-        
-        if(current_node -> next == node_ptr){
+STACK char stack(Stack * stack, Node * new_node){
 
-            current_node -> next = node_ptr -> next;
+    new_node -> next = stack->elements->head;
+    stack->elements->head = new_node;
 
-        }
-        current_node = current_node -> next;
+}
 
-    }
-    return node_ptr;
+STACK Node* unstack(Stack* stack){
+
+    Node* ptr_to_head = stack->elements->head;
+    stack->elements->head = stack->elements->head->next;
+    return ptr_to_head;
+    
 }
