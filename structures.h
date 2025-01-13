@@ -1,13 +1,17 @@
+//This library contains a set of data structures for C.
+//Dependencies: None
+//Version: 0.1
+
 #ifndef STRUCTURE
 #define STRUCTURE
 
 #define SUCCESS 0
 #define ERROR (void*)1
 #define NULLPTR (void*)0X0
-#define UNIVERSAL
-#define LINKED_LIST
-#define STACK
-#define TREE
+#define UNIVERSAL //Descriptive for Nodes
+#define LINKED_LIST //...
+#define STACK //...
+#define TREE //...
 
 UNIVERSAL typedef union{
     
@@ -16,7 +20,7 @@ UNIVERSAL typedef union{
     double set_double;
     
 } Dynamic;
-//Useful for unknown entry type
+//https://en.wikipedia.org/wiki/Union_type
 
 UNIVERSAL typedef struct node{
 
@@ -38,6 +42,7 @@ STACK typedef struct {
     List * elements;
 
 } Stack;
+//https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
 
 TREE typedef struct binary_tree{
 
@@ -48,9 +53,12 @@ TREE typedef struct binary_tree{
 } BinaryTree;
 //https://en.wikipedia.org/wiki/Binary_tree
 
-//https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+TREE typedef BinaryTree BST;
+//https://en.wikipedia.org/wiki/Binary_search_tree
+//They are changes but only in the functions related to them.
+
 //This data structures are instantiated with their respective functions (descripted below)
-//If they dont, they will be created in the heap memory and will cause errors when clearing them.
+//If they dont, they wont be created in the heap memory and will cause errors when clearing them.
 
 UNIVERSAL Node* newNode(int value);
 //Creates a node in heap memory.
@@ -62,20 +70,20 @@ STACK Stack* newStack(Node* init_top);
 //Creates a stack in heap memory.
 
 UNIVERSAL Node* deleteNode(List* list, Node* node_to_delete, int delete_buffer);
-//This function deletes the node residing in node_ptr and returns it's memory address.
+//This function deletes from list the node residing in node_to_deleted and returns it's memory address if delete_buffer is 0. 
 //It iterates the struct until finding a node whose associated pointer is the same that the arg's.
 
 LINKED_LIST Node* last(List* list);
-//This function returns a memory address to the last node in the list. 
+//This function returns a memory address to the last node in the list.
 //Iterates the structure until the element processed has a pointer associated with value 0.
 
 LINKED_LIST char append(List* list, Node* new_node_ptr);
 //Vinculates a created node to the end of the list.
-//Just invokes last() and makes the pointer equal to new_node_ptr
+//Just invokes last() and makes the pointer equal to new_node_ptr.
 
 LINKED_LIST char unshift(List* list, Node* new_node);
 //Vinculates a created node to the beginning of the list.
-//First makes new_node point to the list head and then changes the head to new_node
+//First makes new_node point to the list head and then changes the head to new_node.
 
 LINKED_LIST char insert(List* list, Node* new_node, int position);
 //Vinculates a created node to the selected position.
