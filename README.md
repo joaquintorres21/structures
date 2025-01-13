@@ -1,2 +1,2 @@
 # Structures
-This library offers an implementation of various data structures for C.
+This library contains an implementation of various data structures for C.
