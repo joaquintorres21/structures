@@ -2,6 +2,7 @@
 #define STRUCTURE
 
 #define SUCCESS 0
+#define ERROR (void*)1
 #define NULLPTR (void*)0X0
 #define UNIVERSAL
 #define LINKED_LIST
@@ -16,10 +17,10 @@ UNIVERSAL typedef union{
 
 } Data;
 
-UNIVERSAL typedef struct{
+UNIVERSAL typedef struct Node{
 
     int value;
-    Node*next;
+    struct Node* next;
 
 } Node;
 //https://en.wikipedia.org/wiki/Node_(computer_science)
@@ -32,12 +33,18 @@ LINKED_LIST typedef struct {
 //https://en.wikipedia.org/wiki/Linked_list
 
 STACK typedef struct {
+
     List * elements;
+
 } Stack;
 //https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
 
 UNIVERSAL Node* newNode(int value);
 //Creates a node in heap memory.
+
+LINKED_LIST List* newList(Node* init_head);
+
+STACK Stack*newStack(Node* init_top);
 
 UNIVERSAL Node* deleteNode(List* list, Node* node_to_delete, int delete_buffer);
 //This function deletes the node residing in node_ptr and returns it's memory address.
@@ -55,7 +62,7 @@ LINKED_LIST char unshift(List* list, Node* new_node);
 //Vinculates a created node to the beginning of the list.
 //First makes new_node point to the list head and then changes the head to new_node
 
-LINKED_LIST char index(List* list, Node* new_node, int position);
+LINKED_LIST char insert(List* list, Node* new_node, int position);
 //Vinculates a created node to the selected position.
 //Iterates until the indicated position. If, in the way, founds a node with the value 0,
 //it appends the node to the end of the list. Else, it vinculates the new node with the two beside.
