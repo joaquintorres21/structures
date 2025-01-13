@@ -33,6 +33,7 @@ Stack* newStack(Node* init_top){
 //LIST FUNCTIONS
 
 Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
+
     int deleted = 0;
     Node * current_node = list -> head;
     Node * prev_node = NULLPTR;
@@ -62,9 +63,17 @@ Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
         //The node_ptr is now pointing to a random address and may cause problems, so we just discard it.
     }
     return node_ptr;
+
 }
 
-List* clearList(List* reference){
+List* clearList(List* reference, int clear_buffer){
+    
+    if(clear_buffer) {
+        
+        free(reference);
+        return NULLPTR;
+
+    }
     
     reference->head = NULLPTR;
     return reference;
@@ -136,10 +145,10 @@ Node* unstack(Stack* stack){
     
 }
 
-Stack* clearStack(Stack* stack, int clean_buffer){
+Stack* clearStack(Stack* stack, int clear_buffer){
 
-    clearList(stack->elements);
-    if(clean_buffer){
+    clearList(stack->elements, clear_buffer);
+    if(clear_buffer){
 
         free(stack);
         return NULLPTR;
