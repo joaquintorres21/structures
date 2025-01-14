@@ -1,6 +1,14 @@
 #include "structures.h"
 #include <stdlib.h>
 
+//MISC.
+
+int val(Node* node_ptr){
+
+    return node_ptr->value;
+
+}
+
 //INSTANTIATION FUNCTIONS
 
 Node* newNode(int node_value){
@@ -64,8 +72,20 @@ Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
 
 }
 
-List* clearList(List* reference, int clear_buffer){
+List* clearList(List* reference, int clear_buffer, int clear_elements_buffer){
     
+    Node*current = reference->head;
+    if(clear_elements_buffer){
+        
+        while(current->next){
+            
+            deleteNode(reference, current, 1);
+            current = current -> next;
+
+        }
+        deleteNode(reference, current, 1);
+        
+    }
     if(clear_buffer) {
         
         free(reference);
@@ -130,6 +150,19 @@ char insert(List* list, Node* new_node, int position){
 
 //QUEUE FUNCTIONS
 
+Queue* clearQueue(Queue* queue, int clear_buffer, int clear_elements_buffer){
+    
+    clearList(queue->elements, clear_buffer, clear_elements_buffer);
+    if(clear_buffer){
+
+        free(queue);
+        return NULLPTR;
+    
+    }
+    queue->last = NULLPTR;
+    return queue;
+}
+
 char enqueue(Queue* queue_ptr, Node* node_ptr){
     
     if(!queue_ptr->last){
@@ -186,9 +219,9 @@ Node* bottom(Stack* stack){
 
 }
 
-Stack* clearStack(Stack* stack, int clear_buffer){
+Stack* clearStack(Stack* stack, int clear_buffer, int clear_elements_buffer){
 
-    clearList(stack->elements, clear_buffer);
+    clearList(stack->elements, clear_buffer, clear_elements_buffer);
     if(clear_buffer){
 
         free(stack);
@@ -196,13 +229,5 @@ Stack* clearStack(Stack* stack, int clear_buffer){
     
     }
     return stack;
-
-}
-
-//MISC.
-
-int val(Node* node_ptr){
-
-    return node_ptr->value;
 
 }

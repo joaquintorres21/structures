@@ -103,6 +103,9 @@ UNIVERSAL int val(Node* node_ptr);
 LINKED_LIST List* newList(Node* init_head);
 //Creates a list in heap memory.
 
+LINKED_LIST List* clearList(List* list_to_clear, int delete_list_trigger, int delete_nodes_trigger);
+//Devinculates nodes from list.
+
 LINKED_LIST char append(List* list, Node* new_node_ptr);
 //Vinculates a created node to the end of the list.
 //Just invokes last() and makes the pointer equal to new_node_ptr.
@@ -120,20 +123,30 @@ LINKED_LIST Node* deleteNode(List* list, Node* node_to_delete, int delete_buffer
 //This function deletes from list the node residing in node_to_deleted and returns it's memory address if delete_buffer is 0. 
 //It iterates the struct until finding a node whose associated pointer is the same that the arg's.
 
+LINKED_LIST Node* deletePosition(List* list, int position_to_delete, int delete_buffer);
+//FALTA HACER
+
 LINKED_LIST Node* last(List* list);
 //This function returns a memory address to the last node in the list.
 //Iterates the structure until the element processed has a pointer associated with value 0.
 
-LINKED_LIST List* clearList(List* list_to_clear, int clear_list_buffer);
-//Applies to the values on a Stack, you can pass (stack_name) -> elements as argument.
+LINKED_LIST Node* search(List* list, int value_to);
+//FALTA HACER
+LINKED_LIST int position(List* list, Node* position);
+//FALTA HACER
 
 
 
 
 
 QUEUE Queue* newQueue(Node* init_first);
+//Creates a queue with init_first as first/last.
+
+QUEUE Queue* clearQueue(Queue* queue, int delete_queue_trigger, int delete_elements_trigger);
+//Clears the queue. delete_queue_trigger and delete_elements_trigger free their respective memory locations.
 
 QUEUE char enqueue(Queue* queue, Node* node_ptr);
+//Adds a node to the queue, making it the last of it.
 
 QUEUE Node* dequeue(Queue* queue);
 //Returns the first indexed element.
@@ -145,6 +158,9 @@ QUEUE Node* dequeue(Queue* queue);
 STACK Stack* newStack(Node* init_top);
 //Creates a stack in heap memory.
 
+STACK Stack* clearStack(Stack* stack, int delete_stack_trigger, int delete_elements_trigger);
+//
+
 STACK char stack(Stack* stack, Node* new_node);
 //Appends the new_node to the top of the stack.
 
@@ -153,7 +169,6 @@ STACK Node* unstack(Stack* stack);
 
 STACK Node* top(Stack* stack);
 //Returns the top of the stack.
-
 
 
 
