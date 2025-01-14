@@ -9,7 +9,7 @@ A linked list is an ordered set of nodes. A node is a type with a value and a po
 
 Here is the code to create a node and a list  that contains it:
 
-```
+```c
 #include "structures.h"
 
 int main(){
