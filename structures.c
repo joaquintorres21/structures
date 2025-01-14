@@ -42,15 +42,18 @@ Stack* newStack(Node* init_top){
 //LIST FUNCTIONS
 
 Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
+    int head_flag = 0; 
     Node* current_node = list->head;
-    while(current_node->next!=node_ptr){
+    if(current_node==node_ptr) head_flag++;
+    while(current_node->next!=node_ptr && !head_flag){
 
         if(!current_node->next) return NULLPTR;
         //If there is no such node the function returns an exception.
         current_node = current_node->next;
 
     }
-    current_node->next = current_node->next->next;
+    if(head_flag) list->head = current_node->next;
+    else current_node->next = current_node->next->next;
     if(free_trigger){
         
         free(node_ptr);
@@ -78,6 +81,7 @@ List* clearList(List* reference, int clear_buffer){
 Node* last(List* list){
 
     Node * current_node = list -> head;
+    if(!current_node) return NULLPTR;
     while(current_node->next){
 
             current_node = current_node -> next;
@@ -90,7 +94,8 @@ Node* last(List* list){
 char append(List* list, Node* new_node){
 
     Node * ptr_to_end = last(list);
-    ptr_to_end -> next = new_node;
+    if(!ptr_to_end) list->head = new_node;
+    else ptr_to_end -> next = new_node;
     return SUCCESS;
 
 }
@@ -125,25 +130,38 @@ char insert(List* list, Node* new_node, int position){
 
 //QUEUE FUNCTIONS
 
-//ENQUEUE, DEQUEUE, CLEARQUEUE
 char enqueue(Queue* queue_ptr, Node* node_ptr){
     
+    if(!queue_ptr->last){
 
+        append(queue_ptr->elements, node_ptr);
+        //appending will not affect since there are no elements, iterating would be O(1)
+        queue_ptr->last = node_ptr;
+        return SUCCESS;
+
+    }
+    queue_ptr->last->next = node_ptr;
+    queue_ptr->last = node_ptr;
+    return SUCCESS;
 
 }
 
 Node* dequeue(Queue* queue_ptr){
 
-    
+    if(!queue_ptr->elements->head) return NULLPTR;
+    Node* dequeued = queue_ptr -> elements -> head;
+    queue_ptr -> elements -> head = dequeued -> next;
+    return dequeued;
+
 }
 
 //STACK FUNCTIONS
 
 char stack(Stack * stack, Node * new_node){
 
-    new_node -> next = stack->elements->head;
-    stack->elements->head = new_node;
+    unshift(stack->elements, new_node);
     return 0;
+
 }
 
 Node* unstack(Stack* stack){
@@ -178,5 +196,13 @@ Stack* clearStack(Stack* stack, int clear_buffer){
     
     }
     return stack;
+
+}
+
+//MISC.
+
+int val(Node* node_ptr){
+
+    return node_ptr->value;
 
 }

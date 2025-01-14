@@ -47,6 +47,7 @@ LINKED_LIST typedef struct {
 QUEUE typedef struct {
 
     List* elements;
+    Node* last;
 
 } Queue;
 //The queues work under the FIFO principle (First In, First Out), where the oldest entry is the returned value when
@@ -88,8 +89,12 @@ TREE typedef struct{
 //https://en.wikipedia.org/wiki/Memory_management#HEAP
 
 
+
 UNIVERSAL Node* newNode(int value);
 //Creates a node in heap memory.
+
+UNIVERSAL int val(Node* node_ptr);
+//Returns the value of the node argument.
 
 
 
@@ -126,6 +131,17 @@ LINKED_LIST List* clearList(List* list_to_clear, int clear_list_buffer);
 
 
 
+QUEUE Queue* newQueue(Node* init_first);
+
+QUEUE char enqueue(Queue* queue, Node* node_ptr);
+
+QUEUE Node* dequeue(Queue* queue);
+//Returns the first indexed element.
+
+
+
+
+
 STACK Stack* newStack(Node* init_top);
 //Creates a stack in heap memory.
 
@@ -137,6 +153,8 @@ STACK Node* unstack(Stack* stack);
 
 STACK Node* top(Stack* stack);
 //Returns the top of the stack.
+
+
 
 
 
