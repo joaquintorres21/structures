@@ -27,13 +27,13 @@ Then we can append, unshift or insert new nodes.
   append(my_list_ptr, newNode(19));
   insert(my_list_ptr, newNode(18), 2);
 ```
+There are multiple functions for searching a node.
 
 ```c
   Node* my_search_by_val = search(my_list_ptr, 19);
   Node* my_search_by_pos = local(my_list_ptr, 2);
   Node* my_first_element = first(my_list_ptr);
   Node* my_last_element = last(my_list_ptr);
-  
 ```
 
 And finally we can delete nodes by address/value, or clear the list.
