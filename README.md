@@ -23,11 +23,9 @@ int main(){
 Then we can append, unshift or insert new nodes.
 
 ```c
-  //[...]
   unshift(my_list_ptr, newNode(20));
   append(my_list_ptr, newNode(19));
   insert(my_list_ptr, newNode(18), 2);
-  //[...]
 ```
 
 And delete/clear the list.
