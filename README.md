@@ -5,7 +5,7 @@ This library contains a simple implementation of various data structures for C.
 
 ## Linked lists
 
-A linked list is an ordered set of nodes. A node is a type with a value and a pointer. When it's associated in a structure the pointer is used to signalize the next node of it. The advantage respect vectors is that the memory assignment occurs delocalized, facilitating the addition, management and elimination of it's positions.
+A linked list is an ordered set of nodes. A node is a type with a value and a pointer. When it's associated in a structure the pointer is used to signalize the next node of it. The advantage respect vectors is that the memory assignment occurs delocalized, facilitating the addition, management and removal.
 
 Here is the code to create a node and a list  that contains it:
 
@@ -28,10 +28,19 @@ Then we can append, unshift or insert new nodes.
   insert(my_list_ptr, newNode(18), 2);
 ```
 
-And delete/clear the list.
+```c
+  Node* my_search_by_val = search(my_list_ptr, 19);
+  Node* my_search_by_pos = local(my_list_ptr, 2);
+  Node* my_last_element = my_list_ptr->head;
+  Node* my_last_element = last(my_list_ptr);
+  
+```
+
+And finally we can delete nodes by address/value, or clear the list.
 
 ```c
-  deleteNode(my_list_ptr, my_node_ptr, 1);
+  deleteNode(my_list_ptr, my_search, 1);
+  deleteVal(my_list_ptr, 21, 1);
   clearList(my_list_ptr, 1, 1);
 ```
 
