@@ -31,7 +31,7 @@ Then we can append, unshift or insert new nodes.
 ```c
   Node* my_search_by_val = search(my_list_ptr, 19);
   Node* my_search_by_pos = local(my_list_ptr, 2);
-  Node* my_last_element = my_list_ptr->head;
+  Node* my_first_element = first(my_list_ptr);
   Node* my_last_element = last(my_list_ptr);
   
 ```
