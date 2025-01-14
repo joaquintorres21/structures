@@ -22,45 +22,40 @@ List* newList(Node* init_head){
 
 }
 
+Queue* newQueue(Node* init_first){
+    
+    Queue* created_queue = (Queue*)malloc(sizeof(Queue));
+    if(!created_queue) return ERROR;
+    created_queue->elements->head = init_first;
+
+}
+
 Stack* newStack(Node* init_top){
     
     Stack* created_stack = (Stack*)malloc(sizeof(Stack));
     if(!created_stack) return ERROR;
     created_stack->elements->head = init_top;
     return created_stack;
+
 }
 
 //LIST FUNCTIONS
 
 Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
+    Node* current_node = list->head;
+    while(current_node->next!=node_ptr){
 
-    int deleted = 0;
-    Node * current_node = list -> head;
-    Node * prev_node = NULLPTR;
-    for(int increment = 0; current_node -> next != NULLPTR; increment++){
-        
-        if(current_node == node_ptr){
-            deleted = 0;
-            if(!prev_node) {
-                list->head = current_node->next;
-                break;
-            }
-            else prev_node -> next = current_node -> next;
-            break;
-            
-        }
-        prev_node = current_node;
-        current_node = current_node -> next;
+        if(!current_node->next) return NULLPTR;
+        //If there is no such node the function returns an exception.
+        current_node = current_node->next;
 
     }
-    //This for is dependent of the ammount of elements in the list, so the complexity is O(n) for all
-    //simple lists.
-    if(!deleted) return ERROR;
-    //If the object is not found in the list, the function returns a 1 implicitly casted.
-    if(free_trigger!=0) {
+    current_node->next = current_node->next->next;
+    if(free_trigger){
+        
         free(node_ptr);
         return NULLPTR;
-        //The node_ptr is now pointing to a random address and may cause problems, so we just discard it.
+
     }
     return node_ptr;
 
@@ -83,7 +78,7 @@ List* clearList(List* reference, int clear_buffer){
 Node* last(List* list){
 
     Node * current_node = list -> head;
-    for(int increment = 0; current_node -> next != NULLPTR; increment++){
+    while(current_node->next){
 
             current_node = current_node -> next;
 
@@ -128,6 +123,20 @@ char insert(List* list, Node* new_node, int position){
 
 }
 
+//QUEUE FUNCTIONS
+
+//ENQUEUE, DEQUEUE, CLEARQUEUE
+char enqueue(Queue* queue_ptr, Node* node_ptr){
+    
+
+
+}
+
+Node* dequeue(Queue* queue_ptr){
+
+    
+}
+
 //STACK FUNCTIONS
 
 char stack(Stack * stack, Node * new_node){
@@ -142,7 +151,21 @@ Node* unstack(Stack* stack){
     Node* ptr_to_head = stack->elements->head;
     stack->elements->head = stack->elements->head->next;
     return ptr_to_head;
-    
+
+}
+
+Node* top(Stack* stack){
+
+    if(!stack->elements->head) return NULLPTR;
+    return stack->elements->head;
+
+}
+
+Node* bottom(Stack* stack){
+
+    if(!stack->elements->head) return NULLPTR;
+    return last(stack->elements);
+
 }
 
 Stack* clearStack(Stack* stack, int clear_buffer){

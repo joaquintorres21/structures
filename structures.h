@@ -1,6 +1,10 @@
-//This library contains a set of data structures for C.
-//Dependencies: None
-//Version: 0.1
+/*
+Name: Structures
+Description: This library contains a set of data structures for C.
+Dependencies: None
+Repository: https://github.com/joaquintorres21/structures
+License: MIT LICENSE
+*/
 
 #ifndef STRUCTURE
 #define STRUCTURE
@@ -10,8 +14,11 @@
 #define NULLPTR (void*)0X0
 #define UNIVERSAL //Descriptive for Nodes
 #define LINKED_LIST //...
+#define QUEUE //...
 #define STACK //...
 #define TREE //...
+
+#define INTERACTIVE //Descriptive for functions that make two struct instances to interact (compare, mix, search, etc.)
 
 UNIVERSAL typedef union{
     
@@ -37,11 +44,22 @@ LINKED_LIST typedef struct {
 } List;
 //https://en.wikipedia.org/wiki/Linked_list
 
+QUEUE typedef struct {
+
+    List* elements;
+
+} Queue;
+//The queues work under the FIFO principle (First In, First Out), where the oldest entry is the returned value when
+//a request is done.
+//https://en.wikipedia.org/wiki/Queue_(abstract_data_type)
+
 STACK typedef struct {
 
-    List * elements;
+    List* elements;
 
 } Stack;
+//The stacks work under the LIFO principle (Last in, First Out), where the last entry is the returned value when a
+//request is done. 
 //https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
 
 TREE typedef struct binary_tree{
@@ -51,31 +69,34 @@ TREE typedef struct binary_tree{
     struct binary_tree* right_child;
 
 } BinaryTree;
+//A Binary Tree is a Tree type with grade 2. This means that every node can have up to 2 childs.
 //https://en.wikipedia.org/wiki/Binary_tree
 
-TREE typedef BinaryTree BST;
+TREE typedef struct{
+    
+    BinaryTree inner_tree;
+
+} BST;
+//The BST (Binary Search Tree) is a binary tree with an exclusive storage rule: 
+//If the insertion is lower than the root, will be the left side child.
+//If the insertion is higher than the root, will be the right side child.
 //https://en.wikipedia.org/wiki/Binary_search_tree
-//They are changes but only in the functions related to them.
+
 
 //This data structures are instantiated with their respective functions (descripted below)
 //If they dont, they wont be created in the heap memory and will cause errors when clearing them.
+//https://en.wikipedia.org/wiki/Memory_management#HEAP
+
 
 UNIVERSAL Node* newNode(int value);
 //Creates a node in heap memory.
 
+
+
+
+
 LINKED_LIST List* newList(Node* init_head);
 //Creates a list in heap memory.
-
-STACK Stack* newStack(Node* init_top);
-//Creates a stack in heap memory.
-
-UNIVERSAL Node* deleteNode(List* list, Node* node_to_delete, int delete_buffer);
-//This function deletes from list the node residing in node_to_deleted and returns it's memory address if delete_buffer is 0. 
-//It iterates the struct until finding a node whose associated pointer is the same that the arg's.
-
-LINKED_LIST Node* last(List* list);
-//This function returns a memory address to the last node in the list.
-//Iterates the structure until the element processed has a pointer associated with value 0.
 
 LINKED_LIST char append(List* list, Node* new_node_ptr);
 //Vinculates a created node to the end of the list.
@@ -90,14 +111,44 @@ LINKED_LIST char insert(List* list, Node* new_node, int position);
 //Iterates until the indicated position. If, in the way, founds a node with the value 0,
 //it appends the node to the end of the list. Else, it vinculates the new node with the two beside.
 
+LINKED_LIST Node* deleteNode(List* list, Node* node_to_delete, int delete_buffer);
+//This function deletes from list the node residing in node_to_deleted and returns it's memory address if delete_buffer is 0. 
+//It iterates the struct until finding a node whose associated pointer is the same that the arg's.
+
+LINKED_LIST Node* last(List* list);
+//This function returns a memory address to the last node in the list.
+//Iterates the structure until the element processed has a pointer associated with value 0.
+
 LINKED_LIST List* clearList(List* list_to_clear, int clear_list_buffer);
 //Applies to the values on a Stack, you can pass (stack_name) -> elements as argument.
+
+
+
+
+
+STACK Stack* newStack(Node* init_top);
+//Creates a stack in heap memory.
 
 STACK char stack(Stack* stack, Node* new_node);
 //Appends the new_node to the top of the stack.
 
 STACK Node* unstack(Stack* stack);
-//Returns the last indexed element.
+//Deletes the last indexed element from the stack, and then returns it's value.
+
+STACK Node* top(Stack* stack);
+//Returns the top of the stack.
+
+
+
+TREE BinaryTree* newBinaryTree(int tree_root, BinaryTree* left_child, BinaryTree* right_child);
+//If the childs are NULLPTR it will be created a unique node.
+
+TREE BST* newBST(int tree_root);
+//The appending of new entries it's left to the specific functions.
+
+
+
+
 
 
 #endif
