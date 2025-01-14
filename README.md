@@ -2,9 +2,23 @@
 
 This library contains an implementation of various data structures for C.
 
+
 ## Linked lists
 
 A linked list is an ordered set of nodes. A node is a type with a value and a pointer. When it's associated in a structure the pointer is used to signalize the next node of it. The advantage respect vectors is that the memory assignment occurs delocalized, facilitating the addition, management and elimination of it's positions.
+
+Here is the code to create a node and a list  that contains it:
+
+```
+#include "structures.h"
+
+int main(){
+
+  Node* my_node_ptr = newNode(21);
+  List* my_list_ptr = newList(my_node_ptr);
+
+}
+```
 
 ## Queue
 
