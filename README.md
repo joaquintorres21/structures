@@ -20,6 +20,25 @@ int main(){
 }
 ```
 
+Then we can append, unshift or insert new nodes.
+
+```c
+  //[...]
+  unshift(my_list_ptr, newNode(20));
+  append(my_list_ptr, newNode(19));
+  insert(my_list_ptr, newNode(18), 2);
+  //[...]
+```
+
+And delete/clear the list.
+
+```c
+  deleteNode(my_list_ptr, my_node_ptr, 1);
+  clearList(my_list_ptr, 1, 1);
+```
+
+Integer arguments are flags for freeing the buffer used. In deleteNode is for removing the node from heap, and in clearList is for removing both.
+
 ## Queue
 
 A Queue is a linked list with a pointer to it's end. Operates under the FIFO method (First In First Out) where the oldest indexed element is the returned when a request is done. When a node is enqueued it goes to the end of the structure, and the last pointer points to it.
