@@ -1,6 +1,6 @@
 # Structures
 
-This library contains an implementation of various data structures for C.
+This library contains a simple implementation of various data structures for C.
 
 
 ## Linked lists
