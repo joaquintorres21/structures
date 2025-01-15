@@ -9,6 +9,12 @@ int val(Node* node_ptr){
 
 }
 
+int next(Node* node_ptr){
+
+    return node_ptr->next;
+
+}
+
 //INSTANTIATION FUNCTIONS
 
 Node* newNode(int node_value){
@@ -47,6 +53,16 @@ Stack* newStack(Node* init_top){
 
 }
 
+BST* newBST(int root_value){
+
+    BST* created_bst = (BST*)malloc(sizeof(BST*));
+    if(!created_bst) return ERROR;
+    created_bst->value = root_value;
+    created_bst->left_child = NULLPTR;
+    created_bst->right_child = NULLPTR;
+    return created_bst;
+}
+
 //LIST FUNCTIONS
 
 Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
@@ -71,6 +87,20 @@ Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
     return node_ptr;
 
 }
+
+Node* deleteVal(List* list, int value, int clear_buffer){
+
+    deleteNode(list, searchNode(list, value), clear_buffer);
+
+}
+
+Node* deletePosition(List* list, int position, int clear_buffer){
+   
+    deleteNode(list, local(list, position), clear_buffer);
+
+}
+
+
 
 List* clearList(List* reference, int clear_buffer, int clear_elements_buffer){
     
@@ -98,6 +128,12 @@ List* clearList(List* reference, int clear_buffer, int clear_elements_buffer){
 
 }
 
+Node* first(List* list){
+
+    return list->head;
+    
+}
+
 Node* last(List* list){
 
     Node * current_node = list -> head;
@@ -110,6 +146,38 @@ Node* last(List* list){
     return current_node;
 
 }
+
+Node* searchNode(List* list, int val){
+    
+    Node* current_node = list->head;
+    while(current_node){
+    
+        if(current_node->value == val){
+        
+            return current_node;
+        
+        }
+        current_node = current_node->next;
+    }
+    return NULLPTR;
+
+}
+
+Node* local(List* list, int position){
+
+    int increment = 0;
+    Node* current_node = list->head;
+    while(increment < position){
+        
+        if(!current_node->next) return NULLPTR;
+        current_node = current_node -> next;
+        increment++;
+
+    }
+    return current_node; 
+    
+}
+
 
 char append(List* list, Node* new_node){
 
@@ -224,10 +292,101 @@ Stack* clearStack(Stack* stack, int clear_buffer, int clear_elements_buffer){
     clearList(stack->elements, clear_buffer, clear_elements_buffer);
     if(clear_buffer){
 
-        free(stack);
         return NULLPTR;
     
     }
     return stack;
+
+}
+
+//BST FUNCTIONS
+
+BST* addChild(BST*root, int child_value){
+
+    if(root->value < child_value){
+
+        if(root->right_child) return addChild(root->right_child, child_value);
+        root->right_child = newBST(child_value);
+        return SUCCESS;
+
+    }
+    
+    else if(root->value > child_value){
+        
+        if(root->left_child) return addChild(root->left_child, child_value);
+        root->left_child = newBST(child_value);
+        return SUCCESS;
+
+    }
+    
+    return NULLPTR;
+    //Trying to add an equal value to a BST returns an exception.
+
+}
+
+BST* search(BST* root, int value){
+    
+    if(!root) return ERROR;
+
+    if(root->value != value){
+
+        if(root->value > value) return search(root->left_child, value);
+        else return search(root->right_child, value);
+
+    }
+    return root;
+
+}
+
+BST* max(BST*root){
+
+    if(root->right_child) return max(root->right_child);
+    return root;
+
+}
+
+BST* min(BST*root, int translate){
+
+    if(root->left_child) return min(root->left_child, translate);
+    return root;
+
+}
+
+BST* deleteChild(BST* root, int value, int clear){
+
+    if(!root) return ERROR;
+    if(root->value == value){
+
+        if(root->left_child && root->right_child){
+            
+            BST* max_node = max(root->left_child)->value;
+            root->value = max_node->value;
+            free(max_node);
+
+        }
+
+        if(root->left_child){
+            
+            root->value = root->left_child->value;
+            BST* left = root->left_child;
+            root->left_child = root->left_child->left_child;
+            root->right_child = root->left_child->right_child;
+            free(left);
+
+        }
+        
+        if(root->right_child){
+
+            root->value = root->right_child->value;
+            BST* right = root->right_child;
+            root->right_child = root->right_child->left_child;
+            root->right_child = root->right_child->right_child;
+            free(right);
+
+        }
+
+    }
+    if(root->value < value) return deleteChild(root->right_child, value, clear);
+    else return deleteChild(root->left_child, value, clear);
 
 }

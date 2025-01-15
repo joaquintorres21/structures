@@ -65,7 +65,7 @@ STACK typedef struct {
 
 TREE typedef struct binary_tree{
 
-    int root;
+    int value;
     struct binary_tree* left_child;
     struct binary_tree* right_child;
 
@@ -73,9 +73,11 @@ TREE typedef struct binary_tree{
 //A Binary Tree is a Tree type with grade 2. This means that every node can have up to 2 childs.
 //https://en.wikipedia.org/wiki/Binary_tree
 
-TREE typedef struct{
+TREE typedef struct bst{
     
-    BinaryTree inner_tree;
+    int value;
+    struct bst* left_child;
+    struct bst* right_child;
 
 } BST;
 //The BST (Binary Search Tree) is a binary tree with an exclusive storage rule: 
@@ -123,17 +125,25 @@ LINKED_LIST Node* deleteNode(List* list, Node* node_to_delete, int delete_buffer
 //This function deletes from list the node residing in node_to_deleted and returns it's memory address if delete_buffer is 0. 
 //It iterates the struct until finding a node whose associated pointer is the same that the arg's.
 
+LINKED_LIST Node* deleteVal(List* list, int value, int clear_buffer);
+//Deletes the first node which contains the value.
+
 LINKED_LIST Node* deletePosition(List* list, int position_to_delete, int delete_buffer);
-//FALTA HACER
+//Deletes the node in position_to_delete.
+
+LINKED_LIST Node* first(List* list);
+//Returns the head of the list.
 
 LINKED_LIST Node* last(List* list);
-//This function returns a memory address to the last node in the list.
+//Returns a memory address to the last node in the list.
 //Iterates the structure until the element processed has a pointer associated with value 0.
 
-LINKED_LIST Node* search(List* list, int value_to);
-//FALTA HACER
-LINKED_LIST int position(List* list, Node* position);
-//FALTA HACER
+LINKED_LIST Node* searchNode(List* list, int value_to_search);
+//Search the first node with value = value_to_search and returns its memory address.
+
+LINKED_LIST Node* local(List* list, int position_to_search);
+//Search a node by position and returns its memory address.
+
 
 
 
@@ -179,9 +189,11 @@ TREE BinaryTree* newBinaryTree(int tree_root, BinaryTree* left_child, BinaryTree
 TREE BST* newBST(int tree_root);
 //The appending of new entries it's left to the specific functions.
 
+TREE BST* addChild(BST* binary_search_tree, int child_value);
 
+TREE BST* search(BST* binary_search_tree, int value_to_search);
 
-
+TREE BST* deleteChild(BST* binary_search_tree, int child_value);
 
 
 #endif
