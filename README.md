@@ -54,7 +54,7 @@ Here is a code for instantiating a queue and operating with it.
 ```c
 Queue* my_queue = newQueue(newNode(100));
 enqueue(my_queue, newNode(10));
-dequeue(my_queue);
+Node* deq = dequeue(my_queue); //returns the node with value 100, val(deq) = 100
 clearQueue(my_queue, 1, 1);
 ```
 
@@ -66,7 +66,7 @@ Here is a code for instantiating a stack and operating with it.
 ```c
 Stack* my_stack = newStack(newNode(100));
 stack(my_stack, newNode(10));
-unstack(my_stack);
+unstack(my_stack); //returns the node with value 10, val(deq) = 10
 clearStack(my_stack, 1, 1);
 ```
 
