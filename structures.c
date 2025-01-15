@@ -340,14 +340,14 @@ BST* search(BST* root, int value){
 
 BST* max(BST*root){
 
-    if(root->right_child) return max(root->right_child);
+    if(root->right_child->right_child) return max(root->right_child);
     return root;
 
 }
 
 BST* min(BST*root, int translate){
 
-    if(root->left_child) return min(root->left_child, translate);
+    if(root->left_child->left_child) return min(root->left_child, translate);
     return root;
 
 }
@@ -356,34 +356,43 @@ BST* deleteChild(BST* root, int value, int clear){
 
     if(!root) return ERROR;
     if(root->value == value){
+        
+        BST*location = root;
 
         if(root->left_child && root->right_child){
-            
-            BST* max_node = max(root->left_child)->value;
-            root->value = max_node->value;
-            free(max_node);
 
+            BST*l_c = root->left_child;
+            BST*r_c = root->right_child;
+            BST* mark = max(root->left_child);
+            root = mark->right_child;
+            root->left_child = l_c;
+            root->right_child = r_c;
+            mark->right_child = NULLPTR;
+            
         }
 
         if(root->left_child){
             
-            root->value = root->left_child->value;
-            BST* left = root->left_child;
-            root->left_child = root->left_child->left_child;
-            root->right_child = root->left_child->right_child;
-            free(left);
+            BST* mark = root->left_child;
+            root = mark;
 
         }
         
         if(root->right_child){
 
-            root->value = root->right_child->value;
-            BST* right = root->right_child;
-            root->right_child = root->right_child->left_child;
-            root->right_child = root->right_child->right_child;
-            free(right);
+            BST* mark = root->right_child;
+            root = mark;
 
         }
+        
+        if(clear){
+            
+            free(location);
+            return NULLPTR;
+
+        }
+        
+        return location;
 
     }
     if(root->value < value) return deleteChild(root->right_child, value, clear);
