@@ -81,5 +81,4 @@ addChild(my_bst, 0); //added as left child
 addChild(my_bst, 5);
 addChild(my_bst, 4);
 ```
-![image](https://github.com/user-attachments/assets/da00791a-cd7f-448a-af00-dd2b3bc6eef0)
 
