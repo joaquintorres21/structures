@@ -50,6 +50,13 @@ Integer arguments are flags for freeing the buffer used. In deleteNode is for re
 
 A queue is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence and the removal of entities from the other end of the sequence. By convention, the end of the sequence at which elements are added is called the back, tail, or rear of the queue, and the end at which elements are removed is called the head or front of the queue, analogously to the words used when people line up to wait for goods or services.
 
+Here is a code for instantiating a queue and operating with it.
+```c
+Queue* my_queue = newQueue(newNode(100));
+enqueue(my_queue, newNode(10));
+dequeue(my_queue);
+clearQueue(my_queue, 1, 1);
+```
 
 ## Stack
 
@@ -60,4 +67,10 @@ Here is a code for instantiating a stack and operating with it.
 Stack* my_stack = newStack(newNode(100));
 stack(my_stack, newNode(10));
 unstack(my_stack);
+clearStack(my_stack, 1, 1);
 ```
+
+## Binary Search Tree
+
+A binary search tree (BST), also called an ordered or sorted binary tree, is a rooted binary tree data structure with the key of each internal node being greater than all the keys in the respective node's left subtree and less than the ones in its right subtree. The time complexity of operations on the binary search tree is linear with respect to the height of the tree.
+
