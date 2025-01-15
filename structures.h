@@ -1,5 +1,4 @@
 /*
-Name: Structures
 Description: This library contains a set of data structures for C.
 Dependencies: None
 */
