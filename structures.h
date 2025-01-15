@@ -193,7 +193,7 @@ TREE BST* addChild(BST* binary_search_tree, int child_value);
 
 TREE BST* search(BST* binary_search_tree, int value_to_search);
 
-TREE BST* deleteChild(BST* binary_search_tree, int child_value);
+TREE BST* deleteChild(BST* binary_search_tree, int child_value, int clear_buffer);
 
 
 #endif
