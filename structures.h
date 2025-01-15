@@ -1,8 +1,3 @@
-/*
-Description: This library contains a set of data structures for C.
-Dependencies: None
-*/
-
 #ifndef STRUCTURE
 #define STRUCTURE
 

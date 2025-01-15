@@ -9,7 +9,7 @@ int val(Node* node_ptr){
 
 }
 
-int next(Node* node_ptr){
+Node* next(Node* node_ptr){
 
     return node_ptr->next;
 
