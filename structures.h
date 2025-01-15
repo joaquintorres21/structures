@@ -2,8 +2,6 @@
 Name: Structures
 Description: This library contains a set of data structures for C.
 Dependencies: None
-Repository: https://github.com/joaquintorres21/structures
-License: MIT LICENSE
 */
 
 #ifndef STRUCTURE
