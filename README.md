@@ -5,7 +5,7 @@ This library contains a simple implementation of various data structures for C.
 
 ## Linked lists
 
-A linked list is an ordered set of nodes. A node is a type with a value and a pointer. When it's associated in a structure the pointer is used to signalize the next node of it. The advantage respect vectors is that the memory assignment occurs delocalized, facilitating the addition, management and removal.
+A linked list is a linear collection of data elements whose order is not given by their physical placement in memory. Instead, each element points to the next. It is a data structure consisting of a collection of nodes which together represent a sequence. In its most basic form, each node contains data, and a reference (in other words, a link) to the next node in the sequence. This structure allows for efficient insertion or removal of elements from any position in the sequence during iteration. More complex variants add additional links, allowing more efficient insertion or removal of nodes at arbitrary positions. A drawback of linked lists is that data access time is linear in respect to the number of nodes in the list. Because nodes are serially linked, accessing any node requires that the prior node be accessed beforehand (which introduces difficulties in pipelining). Faster access, such as random access, is not feasible. Arrays have better cache locality compared to linked lists.
 
 Here is the code to create a node and a list  that contains it:
 
@@ -48,8 +48,16 @@ Integer arguments are flags for freeing the buffer used. In deleteNode is for re
 
 ## Queue
 
-A Queue is a linked list with a pointer to it's end. Operates under the FIFO method (First In First Out) where the oldest indexed element is the returned when a request is done. When a node is enqueued it goes to the end of the structure, and the last pointer points to it.
+A queue is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence and the removal of entities from the other end of the sequence. By convention, the end of the sequence at which elements are added is called the back, tail, or rear of the queue, and the end at which elements are removed is called the head or front of the queue, analogously to the words used when people line up to wait for goods or services.
+
 
 ## Stack
 
-A Queue is a linked list that operates under the LIFO method (Last In First Out). When a node is stacked it goes to the top of the stack and will be the returned value when a request is made.
+A stack is an abstract data type that serves as a collection of elements with two main operations: Push, which adds an element to the collection, and Pop, which removes the most recently added element. Additionally, a peek operation can, without modifying the stack, return the value of the last element added. The name stack is an analogy to a set of physical items stacked one atop another, such as a stack of plates.
+
+Here is a code for instantiating a stack and operating with it.
+```c
+Stack* my_stack = newStack(newNode(100));
+stack(my_stack, newNode(10));
+unstack(my_stack);
+```
