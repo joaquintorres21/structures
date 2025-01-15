@@ -74,3 +74,12 @@ clearStack(my_stack, 1, 1);
 
 A binary search tree (BST), also called an ordered or sorted binary tree, is a rooted binary tree data structure with the key of each internal node being greater than all the keys in the respective node's left subtree and less than the ones in its right subtree. The time complexity of operations on the binary search tree is linear with respect to the height of the tree.
 
+```c
+BST* my_bst = newBST(1);
+addChild(my_bst, 2); //added as right child
+addChild(my_bst, 0); //added as left child
+addChild(my_bst, 5);
+addChild(my_bst, 4);
+```
+![image](https://github.com/user-attachments/assets/da00791a-cd7f-448a-af00-dd2b3bc6eef0)
+
