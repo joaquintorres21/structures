@@ -30,13 +30,6 @@ char strDif(char* s, char* t){
 
 }
 
-BST*fatherOfMax(BST* root){
-
-    if(root->right_child->right_child) return max(root->right_child);
-    return root;
-
-}
-
 //INSTANTIATION FUNCTIONS
 
 Node* newNode(char* node_value){
@@ -79,6 +72,7 @@ BST* newBST(int root_value){
 
     BST* created_bst = (BST*)malloc(sizeof(BST));
     if(!created_bst) return ERROR;
+    created_bst->father = NULLPTR;
     created_bst->left_child = NULLPTR;
     created_bst->right_child = NULLPTR;
     created_bst->value = root_value;
@@ -112,13 +106,13 @@ Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
 
 Node* deleteVal(List* list, char* value, int clear_buffer){
 
-    deleteNode(list, searchNode(list, value), clear_buffer);
+    return deleteNode(list, searchNode(list, value), clear_buffer);
 
 }
 
 Node* deletePosition(List* list, int position, int clear_buffer){
    
-    deleteNode(list, local(list, position), clear_buffer);
+    return deleteNode(list, local(list, position), clear_buffer);
 
 }
 
@@ -326,6 +320,7 @@ BST* addChild(BST* root, int child_value){
         
         if(root->right_child) return addChild(root->right_child, child_value);
         root->right_child = newBST(child_value);
+        root->right_child->father = root;
         return root->right_child;
     
     }
@@ -334,6 +329,7 @@ BST* addChild(BST* root, int child_value){
         
         if(root->left_child) return addChild(root->left_child, child_value);
         root->left_child = newBST(child_value);
+        root->left_child->father = root;
         return root->left_child;
     }
 
@@ -371,50 +367,62 @@ BST* min(BST*root){
 
 }
 
-BST* deleteChild(BST* root, int value, int clear){
+BST* deleteChild(BST* root, BST* Child, int clear){
+    
+    return deleteChildByValue(root, Child->value, clear);
 
-    if(!root) return ERROR;
+}
+
+BST* deleteChildByValue(BST* root, int value, int clear){
+
     if(root->value == value){
-        
-        BST*location = root;
+
+        BST* mark;
 
         if(root->left_child && root->right_child){
-
-            BST*l_c = root->left_child;
-            BST*r_c = root->right_child;
-            BST* mark = fatherOfMax(root->left_child);
-            root = mark->right_child;
-            root->left_child = l_c;
-            root->right_child = r_c;
-            mark->right_child = NULLPTR;
             
+            mark = max(root->left_child);
+
+            mark->father->right_child = NULLPTR;
+
+            mark->left_child = root->left_child;
+            mark->left_child = root->right_child;
+
+            if(root->father->left_child == root) root->father->left_child = mark;
+            else root->father->right_child = mark;
+
         }
 
-        if(root->left_child){
+        else if(root->left_child){
             
-            BST* mark = root->left_child;
-            root = mark;
+            if(root->father->left_child == root) root->father->left_child = root->left_child;
+            else root->father->right_child = root->left_child;
 
         }
         
-        if(root->right_child){
-
-            BST* mark = root->right_child;
-            root = mark;
+        else if(root->right_child){
+            
+            if(root->father->left_child == root) root->father->left_child = root->right_child;
+            else root->father->right_child = root->right_child;
 
         }
-        
+    
+        else {
+
+            if(root->father->left_child == root) root->father->left_child = NULLPTR;
+            else root->father->right_child = NULLPTR;
+
+        }
+
         if(clear){
             
-            free(location);
+            free(root);
             return NULLPTR;
-
         }
         
-        return location;
-
+        return root;
     }
-    if(root->value < value) return deleteChild(root->right_child, value, clear);
-    else return deleteChild(root->left_child, value, clear);
+    else if(root->value > value) return deleteChildByValue(root->left_child, value, clear);
+    else return deleteChildByValue(root->right_child, value, clear);
 
 }

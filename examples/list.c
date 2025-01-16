@@ -14,4 +14,5 @@ int main(){
     unshift(my_list_ptr, newNode("new key"));
     Node* new_ptr = searchNode(my_list_ptr, "new key");
     printf("%s\n", val(new_ptr));
+
 }

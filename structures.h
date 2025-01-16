@@ -68,6 +68,7 @@ TREE typedef struct binary_tree{
 TREE typedef struct bst{
     
     int value;
+    struct bst* father;
     struct bst* left_child;
     struct bst* right_child;
 
@@ -185,7 +186,9 @@ TREE BST* addChild(BST* binary_search_tree, int child_value);
 
 TREE BST* search(BST* binary_search_tree, int value_to_search);
 
-TREE BST* deleteChild(BST* binary_search_tree, int child_value, int clear_buffer);
+TREE BST* deleteChild(BST* binary_search_tree, BST* child_to_delete, int clear_buffer);
+
+TREE BST* deleteChildByValue(BST* binary_search_tree, int child_value, int clear_buffer);
 
 TREE BST* max(BST* root);
 

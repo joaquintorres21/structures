@@ -1,1 +1,0 @@
-gcc -o .\examples\list.exe .\examples\list.c .\structures.c
