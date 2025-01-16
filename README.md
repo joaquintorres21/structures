@@ -15,7 +15,8 @@ Here is the code to create a node and a list  that contains it:
 int main(){
 
   Node* my_node_ptr = newNode(21);
-  List* my_list_ptr = newList(my_node_ptr);
+  List* my_list_ptr = newList();
+  append(my_list_ptr, my_node_ptr);
 
 }
 ```
@@ -23,8 +24,8 @@ int main(){
 Then we can append, unshift or insert new nodes.
 
 ```c
-  unshift(my_list_ptr, newNode(20));
-  append(my_list_ptr, newNode(19));
+  unshift(my_list_ptr, newNode(your_str));
+  append(my_list_ptr, newNode(your_str));
   insert(my_list_ptr, newNode(18), 2);
 ```
 There are multiple functions for searching a node.
