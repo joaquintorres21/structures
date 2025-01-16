@@ -30,6 +30,13 @@ char strDif(char* s, char* t){
 
 }
 
+BST*fatherOfMax(BST* root){
+
+    if(root->right_child->right_child) return max(root->right_child);
+    return root;
+
+}
+
 //INSTANTIATION FUNCTIONS
 
 Node* newNode(char* node_value){
@@ -70,11 +77,11 @@ Stack* newStack(){
 
 BST* newBST(int root_value){
 
-    BST* created_bst = (BST*)malloc(sizeof(BST*));
+    BST* created_bst = (BST*)malloc(sizeof(BST));
     if(!created_bst) return ERROR;
-    created_bst->value = root_value;
     created_bst->left_child = NULLPTR;
     created_bst->right_child = NULLPTR;
+    created_bst->value = root_value;
     return created_bst;
 }
 
@@ -313,25 +320,24 @@ Stack* clearStack(Stack* stack, int clear_buffer, int clear_elements_buffer){
 
 //BST FUNCTIONS
 
-BST* addChild(BST*root, int child_value){
+BST* addChild(BST* root, int child_value){
 
-    if(root->value < child_value){
-
+    if( child_value > (root->value) ){
+        
         if(root->right_child) return addChild(root->right_child, child_value);
         root->right_child = newBST(child_value);
-        return SUCCESS;
-
+        return root->right_child;
+    
     }
     
-    else if(root->value > child_value){
+    if( child_value < (root->value) ){
         
         if(root->left_child) return addChild(root->left_child, child_value);
         root->left_child = newBST(child_value);
-        return SUCCESS;
-
+        return root->left_child;
     }
-    
-    return NULLPTR;
+
+    return root;
     //Trying to add an equal value to a BST returns an exception.
 
 }
@@ -352,14 +358,15 @@ BST* search(BST* root, int value){
 
 BST* max(BST*root){
 
-    if(root->right_child->right_child) return max(root->right_child);
+    if(root->right_child) return max(root->right_child);
     return root;
 
 }
 
-BST* min(BST*root, int translate){
 
-    if(root->left_child->left_child) return min(root->left_child, translate);
+BST* min(BST*root){
+
+    if(root->left_child) return min(root->left_child);
     return root;
 
 }
@@ -375,7 +382,7 @@ BST* deleteChild(BST* root, int value, int clear){
 
             BST*l_c = root->left_child;
             BST*r_c = root->right_child;
-            BST* mark = max(root->left_child);
+            BST* mark = fatherOfMax(root->left_child);
             root = mark->right_child;
             root->left_child = l_c;
             root->right_child = r_c;

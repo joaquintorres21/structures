@@ -90,7 +90,7 @@ UNIVERSAL Node* newNode(char* value);
 UNIVERSAL char* val(Node* node_ptr);
 //Returns the value of the node argument.
 
-
+UNIVERSAL char strDif(char* string_one, char* string_two);
 
 
 
@@ -188,6 +188,8 @@ TREE BST* search(BST* binary_search_tree, int value_to_search);
 TREE BST* deleteChild(BST* binary_search_tree, int child_value, int clear_buffer);
 
 TREE BST* max(BST* root);
+
+TREE BST* min(BST* root);
 
 
 #endif
