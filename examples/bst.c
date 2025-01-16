@@ -21,5 +21,5 @@ int main(){
     printf("%d\n", my_bst->value);
     //even if it's removed, the node without fathers cant be dereferenced.
     //if a root has no fathers, and its the value to delete, just updates the values.
-
+    //it also cant be cleared from memory in the functions, just manually.
 }
