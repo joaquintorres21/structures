@@ -23,7 +23,7 @@ UNIVERSAL typedef union{
 
 UNIVERSAL typedef struct node{
 
-    int value;
+    char* value;
     struct node* next;
 
 } Node;
@@ -84,17 +84,17 @@ TREE typedef struct bst{
 
 
 
-UNIVERSAL Node* newNode(int value);
+UNIVERSAL Node* newNode(char* value);
 //Creates a node in heap memory.
 
-UNIVERSAL int val(Node* node_ptr);
+UNIVERSAL char* val(Node* node_ptr);
 //Returns the value of the node argument.
 
 
 
 
 
-LINKED_LIST List* newList(Node* init_head);
+LINKED_LIST List* newList();
 //Creates a list in heap memory.
 
 LINKED_LIST List* clearList(List* list_to_clear, int delete_list_trigger, int delete_nodes_trigger);
@@ -117,7 +117,7 @@ LINKED_LIST Node* deleteNode(List* list, Node* node_to_delete, int delete_buffer
 //This function deletes from list the node residing in node_to_deleted and returns it's memory address if delete_buffer is 0. 
 //It iterates the struct until finding a node whose associated pointer is the same that the arg's.
 
-LINKED_LIST Node* deleteVal(List* list, int value, int clear_buffer);
+LINKED_LIST Node* deleteVal(List* list, char* value, int clear_buffer);
 //Deletes the first node which contains the value.
 
 LINKED_LIST Node* deletePosition(List* list, int position_to_delete, int delete_buffer);
@@ -130,7 +130,7 @@ LINKED_LIST Node* last(List* list);
 //Returns a memory address to the last node in the list.
 //Iterates the structure until the element processed has a pointer associated with value 0.
 
-LINKED_LIST Node* searchNode(List* list, int value_to_search);
+LINKED_LIST Node* searchNode(List* list, char* value_to_search);
 //Search the first node with value = value_to_search and returns its memory address.
 
 LINKED_LIST Node* local(List* list, int position_to_search);
@@ -141,7 +141,7 @@ LINKED_LIST Node* local(List* list, int position_to_search);
 
 
 
-QUEUE Queue* newQueue(Node* init_first);
+QUEUE Queue* newQueue();
 //Creates a queue with init_first as first/last.
 
 QUEUE Queue* clearQueue(Queue* queue, int delete_queue_trigger, int delete_elements_trigger);
@@ -157,7 +157,7 @@ QUEUE Node* dequeue(Queue* queue);
 
 
 
-STACK Stack* newStack(Node* init_top);
+STACK Stack* newStack();
 //Creates a stack in heap memory.
 
 STACK Stack* clearStack(Stack* stack, int delete_stack_trigger, int delete_elements_trigger);
@@ -186,6 +186,8 @@ TREE BST* addChild(BST* binary_search_tree, int child_value);
 TREE BST* search(BST* binary_search_tree, int value_to_search);
 
 TREE BST* deleteChild(BST* binary_search_tree, int child_value, int clear_buffer);
+
+TREE BST* max(BST* root);
 
 
 #endif

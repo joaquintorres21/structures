@@ -3,7 +3,7 @@
 
 //MISC.
 
-int val(Node* node_ptr){
+char* val(Node* node_ptr){
 
     return node_ptr->value;
 
@@ -15,9 +15,24 @@ Node* next(Node* node_ptr){
 
 }
 
+char strDif(char* s, char* t){
+    
+    int i = 0;
+    while(*(s+i)==*(t+i)){
+        
+        if(*(s+i)=='\0'){
+            return 0;
+        }
+        i++;
+
+    }
+    return 1;
+
+}
+
 //INSTANTIATION FUNCTIONS
 
-Node* newNode(int node_value){
+Node* newNode(char* node_value){
 
     Node* created_node = (Node*) malloc(sizeof(Node));
     if(!created_node) return ERROR;
@@ -27,28 +42,28 @@ Node* newNode(int node_value){
 
 }
 
-List* newList(Node* init_head){
+List* newList(){
     
     List* created_list = (List*)malloc(sizeof(List));
     if(!created_list) return ERROR;
-    created_list->head = init_head;
+    created_list->head = NULLPTR;
     return created_list;
 
 }
 
-Queue* newQueue(Node* init_first){
+Queue* newQueue(){
     
     Queue* created_queue = (Queue*)malloc(sizeof(Queue));
     if(!created_queue) return ERROR;
-    created_queue->elements->head = init_first;
+    created_queue->elements->head = NULLPTR;
 
 }
 
-Stack* newStack(Node* init_top){
+Stack* newStack(){
     
     Stack* created_stack = (Stack*)malloc(sizeof(Stack));
     if(!created_stack) return ERROR;
-    created_stack->elements->head = init_top;
+    created_stack->elements->head = NULLPTR;
     return created_stack;
 
 }
@@ -88,7 +103,7 @@ Node* deleteNode(List* list, Node* node_ptr, int free_trigger){
 
 }
 
-Node* deleteVal(List* list, int value, int clear_buffer){
+Node* deleteVal(List* list, char* value, int clear_buffer){
 
     deleteNode(list, searchNode(list, value), clear_buffer);
 
@@ -147,17 +162,14 @@ Node* last(List* list){
 
 }
 
-Node* searchNode(List* list, int val){
+Node* searchNode(List* list, char* val){
     
     Node* current_node = list->head;
     while(current_node){
     
-        if(current_node->value == val){
-        
-            return current_node;
-        
-        }
+        if(!strDif(current_node->value, val)) return current_node;
         current_node = current_node->next;
+
     }
     return NULLPTR;
 
