@@ -54,10 +54,10 @@ A queue is a collection of entities that are maintained in a sequence and can be
 Here is a code for instantiating a queue and operating with it.
 ```c
 Node* my_node = newNode("qwerty");
-Queue* my_stack = newStack();
-enqueue(my_stack, my_node);
-enqueue(my_stack, newNode("azerty"));
-dequeue(my_stack); //returns the node with value "qwerty"
+Queue* my_queue = newQueue();
+enqueue(my_queue, my_node);
+enqueue(my_queue, newNode("azerty"));
+dequeue(my_queue); //returns the node with value "qwerty"
 clearQueue(my_queue, 1, 1);
 ```
 
@@ -85,5 +85,8 @@ addChild(my_bst, 2); //added as right child
 addChild(my_bst, 0); //added as left child
 addChild(my_bst, 5);
 addChild(my_bst, 4);
+BST* x = max(my_bst); //childs are also BSTs
+BST* y = min(my_bst);
+BST* z = search(my_bst, 5); //returns tree with value 5 and left child 4
 ```
 
