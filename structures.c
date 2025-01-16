@@ -404,20 +404,22 @@ BST* deleteChildByValue(BST* root, int value, int clear){
         
             if(root->father->left_child == root) root->father->left_child = mark;
             else root->father->right_child = mark;
-        
+
             root->left_child = NULLPTR;
             root->right_child = NULLPTR;
             root->father = NULLPTR;
-        
-        }
-        
-        if(clear){
             
-            free(root);
-            return NULLPTR;
+            if(clear){
+            
+                free(root);
+                return NULLPTR;
+            
+            }
+
         }
 
         return root;
+
     }
     else if(root->value > value) return deleteChildByValue(root->left_child, value, clear);
     else return deleteChildByValue(root->right_child, value, clear);
