@@ -17,8 +17,9 @@ int main(){
     printf("%d\n", my_min->value);
     printf("%d\n", min_of_max->value);    
 
-    BST* deleted = deleteChildByValue(my_bst, my_max->value, 0);
-    printf("%d", max(my_bst)->value);
-    printf("%d\n", deleted->value);
+    deleteChildByValue(my_bst, my_min->value, 0);
+    printf("%d\n", my_bst->value);
+    //even if it's removed, the node without fathers cant be dereferenced.
+    //if a root has no fathers, and its the value to delete, just updates the values.
 
 }

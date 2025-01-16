@@ -382,44 +382,41 @@ BST* deleteChildByValue(BST* root, int value, int clear){
         if(root->left_child && root->right_child){
             
             mark = max(root->left_child);
-
             mark->father->right_child = NULLPTR;
-
             mark->left_child = root->left_child;
-            mark->left_child = root->right_child;
+            mark->right_child = root->right_child;
 
+        }
+
+        else if(root->left_child) mark = root->left_child;
+        else if(root->right_child) mark = root->right_child;
+        else mark = NULLPTR;
+
+        if(!root->father) {
+        
+            root->value = mark->value;
+            root->left_child = mark->left_child;
+            root->right_child = mark->right_child;
+
+        }
+
+        else{
+        
             if(root->father->left_child == root) root->father->left_child = mark;
             else root->father->right_child = mark;
-
-        }
-
-        else if(root->left_child){
-            
-            if(root->father->left_child == root) root->father->left_child = root->left_child;
-            else root->father->right_child = root->left_child;
-
+        
+            root->left_child = NULLPTR;
+            root->right_child = NULLPTR;
+            root->father = NULLPTR;
+        
         }
         
-        else if(root->right_child){
-            
-            if(root->father->left_child == root) root->father->left_child = root->right_child;
-            else root->father->right_child = root->right_child;
-
-        }
-    
-        else {
-
-            if(root->father->left_child == root) root->father->left_child = NULLPTR;
-            else root->father->right_child = NULLPTR;
-
-        }
-
         if(clear){
             
             free(root);
             return NULLPTR;
         }
-        
+
         return root;
     }
     else if(root->value > value) return deleteChildByValue(root->left_child, value, clear);
