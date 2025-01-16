@@ -14,8 +14,9 @@ Here is the code to create a node and a list  that contains it:
 
 int main(){
 
-  Node* my_node_ptr = newNode(21);
-  List* my_list_ptr = newList(my_node_ptr);
+  Node* my_node_ptr = newNode("this is the node value");
+  List* my_list_ptr = newList();
+  append(my_list_ptr, my_node_ptr);
 
 }
 ```
@@ -23,14 +24,14 @@ int main(){
 Then we can append, unshift or insert new nodes.
 
 ```c
-  unshift(my_list_ptr, newNode(20));
-  append(my_list_ptr, newNode(19));
-  insert(my_list_ptr, newNode(18), 2);
+  unshift(my_list_ptr, newNode(your_str));
+  append(my_list_ptr, newNode(your_other_str));
+  insert(my_list_ptr, newNode(your_other_other_str), 2);
 ```
 There are multiple functions for searching a node.
 
 ```c
-  Node* my_search_by_val = search(my_list_ptr, 19);
+  Node* my_search_by_val = search(my_list_ptr, string);
   Node* my_search_by_pos = local(my_list_ptr, 2);
   Node* my_first_element = first(my_list_ptr);
   Node* my_last_element = last(my_list_ptr);
@@ -40,7 +41,7 @@ And finally we can delete nodes by address/value, or clear the list.
 
 ```c
   deleteNode(my_list_ptr, my_search, 1);
-  deleteVal(my_list_ptr, 21, 1);
+  deleteVal(my_list_ptr, string, 1);
   clearList(my_list_ptr, 1, 1);
 ```
 
@@ -52,9 +53,11 @@ A queue is a collection of entities that are maintained in a sequence and can be
 
 Here is a code for instantiating a queue and operating with it.
 ```c
-Queue* my_queue = newQueue(newNode(100));
-enqueue(my_queue, newNode(10));
-Node* deq = dequeue(my_queue); //returns the node with value 100, val(deq) = 100
+Node* my_node = newNode("qwerty");
+Queue* my_stack = newStack();
+enqueue(my_stack, my_node);
+enqueue(my_stack, newNode("azerty"));
+dequeue(my_stack); //returns the node with value "qwerty"
 clearQueue(my_queue, 1, 1);
 ```
 
@@ -64,9 +67,11 @@ A stack is an abstract data type that serves as a collection of elements with tw
 
 Here is a code for instantiating a stack and operating with it.
 ```c
-Stack* my_stack = newStack(newNode(100));
-stack(my_stack, newNode(10));
-unstack(my_stack); //returns the node with value 10, val(deq) = 10
+Node* my_node = newNode("qwerty");
+Stack* my_stack = newStack();
+stack(my_stack, my_node);
+stack(my_stack, newNode("azerty"));
+unstack(my_stack); //returns the node with value "azerty"
 clearStack(my_stack, 1, 1);
 ```
 
